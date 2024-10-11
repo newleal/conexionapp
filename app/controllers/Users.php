@@ -29,7 +29,7 @@ class Users extends Controller{
             ];
 
             //validar los campos
-            // validamos nombres
+            // validamos nombres se valida todos los campos
             if(empty($data['name']))
             {
                 $data['name_err'] = 'Por favor ingrese el nombre completo';
