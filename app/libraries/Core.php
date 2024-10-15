@@ -7,7 +7,7 @@ class Core {
 
     protected $contradorActual = 'Paginas';
     protected $metodoActual = 'index';
-    protected $datos = [];
+    protected $parametros = [];
 
     public function __construct() {
         //Cargamos automaticamente los datos de la url
@@ -32,10 +32,17 @@ class Core {
         {
             if(method_exists($this->contradorActual, $url[1]))
             {
+                // Agregamos el metodo del controlador
                 $this->metodoActual = $url[1];
-                unset($url[1]);
+                unset($url[1]);//Eliminamos el indice ref al metodo de la URL
             }
         }
+
+        // Validamos si bienen parametros
+        $parametros = isset($url) ? $url : null;
+
+        //Lalamar de forma dinamica a los controladores que existan
+        call_user_func_array([$this->contradorActual, $this->metodoActual], $this->parametros);
 
 
     }
