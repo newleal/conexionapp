@@ -6,8 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hola desde index de paginas/index</h1>
+    
+    <h2><?php echo $data['titulo']; ?></h2>
 
-    <p><?php echo $data['titulo']; ?></p>
+    <h3>Listado de Posts</h3>
+
+    <ul>
+        <?php foreach ($data['posts'] as $post) {?>
+            <li><?php echo $post['title']; ?></li>
+       <?php }; ?>     
+    </ul>
+
+    
 </body>
 </html>

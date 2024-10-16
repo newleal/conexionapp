@@ -6,13 +6,24 @@
 
 class Paginas extends Controller{
 
+    private $postModel;
+
     public function __construct(){
         //echo 'Hola mundo desde controlador Paginas';
+        $this->postModel = $this->model('Post');
     }
 
     public function index()
     {
-        $this->view('paginas/index', ['titulo' => 'Bienvenidos']);
+        $posts = $this->postModel->getPosts();
+
+        $data = [
+            'titulo' => 'Bienvenidos al Index',
+            'posts'  => $posts,
+        ];
+
+        
+        $this->view('paginas/index', $data);
     }
 
     public function about()

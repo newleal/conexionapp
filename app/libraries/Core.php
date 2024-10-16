@@ -39,7 +39,7 @@ class Core {
         }
 
         // Validamos si bienen parametros
-        $parametros = isset($url) ? $url : null;
+        $this->parametros = isset($url) ? $url : null;
 
         //Lalamar de forma dinamica a los controladores que existan
         call_user_func_array([$this->contradorActual, $this->metodoActual], $this->parametros);
