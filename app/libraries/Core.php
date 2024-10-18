@@ -38,7 +38,7 @@
         }
 
         //revisamos si vienen parametros
-        $this->parametros = isset($url) ? $url : null;
+        $this->parametros = isset($url) ? array_values($url) : null;
 
         //utilizamos una funcion de carga automatica de datos
         call_user_func_array([$this->controladorActual, $this->metodoActual], $this->parametros);

@@ -4,20 +4,29 @@
  * crear la clase Paginas
  */
 
- class Paginas{
+ class Paginas extends Controller{
 
+    private $postModel;
+    
     public function __construct() {
-
-        echo 'Hola desde controller paginas';
+        $this->postModel = $this->model('Post');
     }
 
     public function index()
     {
-        echo 'Index de Paginas';
+        
+        $posts = $this->postModel->getPosts();
+
+        $data = [
+            'titulo' => 'Datos de los Posts',
+            'posts'  => $posts,
+        ];
+
+        $this->view('paginas/index', $data);
     }
 
     public function about()
     {
-        echo 'about de Paginas';
+        $this->view('paginas/about');
     }
  }
