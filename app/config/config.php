@@ -22,3 +22,7 @@ define('APPROOT', dirname(dirname(__FILE__)));
 //Nombre de la palicacion
 define('SITENAME', 'ConexionApp');
 
+
+//Version de la aplicaicon
+define('APPVERSION', 'V1.0.0');
+

@@ -1,9 +1,8 @@
 <?php require_once(APPROOT . '/views/shared/header.php'); ?>
-    <h1><?php echo $data['titulo']; ?></h1>
+<div class="jumbotron">
+    <h1 class="dispplay-3"><?php echo $data['titulo']; ?></h1>
 
-    <ul>
-        <?php foreach($data['posts'] as $post) { ?>
-            <li><?php echo $post['title']   ; ?></li>
-        <?php } ?>
-    </ul>
-    <?php require_once(APPROOT . '/views/shared/footer.php'); ?>
+    <p>Esta es una aplicacion desarrollada por Miguel Angel</p>
+    Version: <span class="badge badge-info"><?php echo APPVERSION; ?></span>
+</div>
+<?php require_once(APPROOT . '/views/shared/footer.php'); ?>

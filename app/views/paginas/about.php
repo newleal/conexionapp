@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>About</h1>
-</body>
-</html>
+<?php require_once(APPROOT . '/views/shared/header.php'); ?>
+    <div class="jumbotron">
+       <h1 class="dispplay-3">Sobre Nosotros</h1>
+       <p>Esta es una aplicacion desarrollada por Miguel Angel</p>
+       Version: <span class="badge badge-info"><?php echo APPVERSION; ?></span>
+    </div>
+    
+<?php require_once(APPROOT . '/views/shared/footer.php'); ?>
