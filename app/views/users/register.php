@@ -1,6 +1,7 @@
 <?php require_once(APPROOT . '/views/shared/header.php'); ?>
 <div class="jumbotron">
     <h1 class="dispplay-3">Register</h1>
+    <h2><?php echo URLROOT; ?></h2>
 
         <div class="row">
             <div class="col-md-6 mx-auto">

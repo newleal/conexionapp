@@ -9,7 +9,7 @@
     private $userModel;
 
     public function __construct(){
-        //$this->userModel = $this->model();
+        $this->userModel = $this->model('User');
     }
 
     //Metodo registar
@@ -46,6 +46,12 @@
             if(empty($data['email']))
             {
                 $data['email_err'] = 'Por favor ingrese el email';
+            } else {
+                //validar si el email ya existe en la DB
+                if($this->userModel->findUserByEmail($data['email']))
+                {
+                    $data['email_err'] = 'Ya existe un email registrado';
+                }
             }
 
             //validar los datos password
@@ -74,10 +80,24 @@
             if(empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err']))
             {
                 //validado
-                die('Registro exitoso');
+                //cifar la contraseña
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                //registrar usuario
+                if($this->userModel->register($data))
+                {
+                    
+                    flash('register_success', 'Ya estas registrado puedes inciar sesión');
+                    redirect('users/login');
+                } else {
+                    var_dump($this->userModel->register($data));
+                    redirectSinLocation('users/login');
+                    die('Algo malo sucedio');
+                }
+
             } else {
 
-                //Envio de errores a la vista
+                //Envio de errores a la vista de user register y se mostrar en el formulario
                 $this->view('users/register', $data);
             }
 
@@ -103,57 +123,57 @@
         }
     }
 
-        //Metodo login
-        public function login()
+    //Metodo login
+    public function login()
+    {
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($_SERVER['REQUEST_METHOD'] == 'POST')
+            //procesar el formulario
+            //Obtener los datgos del formulario
+            $POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            //Limpiar los datos en $data
+            $data = [
+                'email' => trim($POST['email']),
+                'password' => trim($POST['password']),
+                'emaiil_err' => '',
+                'password_err' => '',
+            ];
+
+            //valdiar que los campos vengan con informacion
+            if(empty($data['email']))
             {
-                //procesar el formulario
-                //Obtener los datgos del formulario
-                $POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $data['email_err'] = 'Por favor ingresa el email';
+            }
 
-                //Limpiar los datos en $data
-                $data = [
-                    'email' => trim($POST['email']),
-                    'password' => trim($POST['password']),
-                    'emaiil_err' => '',
-                    'password_err' => '',
-                ];
+            if(empty($data['password']))
+            {
+                $data['password_err'] = 'Por favor ingresa la contraseña';
+            }
 
-                //valdiar que los campos vengan con informacion
-                if(empty($data['email']))
-                {
-                    $data['email_err'] = 'Por favor ingresa el email';
-                }
-
-                if(empty($data['password']))
-                {
-                    $data['password_err'] = 'Por favor ingresa la contraseña';
-                }
-
-                //valdiamos que no existan mesajes de erro
-                if(empty($data['password_err']) && empty($data['password_err']))
-                {
-                    die('Login Exitoso!');
-                } else {
-                    //cargamos la vista con los errores
-                    $this->view('users/login', $data);
-                }
-
+            //valdiamos que no existan mesajes de erro
+            if(empty($data['password_err']) && empty($data['password_err']))
+            {
+                die('Login Exitoso!');
             } else {
-    
-                //Iniciar la data
-                $data = [
-    
-                    'email' => '',
-                    'password' => '',
-                    'emaiil_err' => '',
-                    'password_err' => '',   
-    
-                ];
-    
-                //Cargar la vista
+                //cargamos la vista con los errores
                 $this->view('users/login', $data);
             }
+
+        } else {
+
+            //Iniciar la data
+            $data = [
+
+                'email' => '',
+                'password' => '',
+                'emaiil_err' => '',
+                'password_err' => '',   
+
+            ];
+
+            //Cargar la vista
+            $this->view('users/login', $data);
         }
+    }
  }

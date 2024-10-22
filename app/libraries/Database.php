@@ -69,6 +69,9 @@
                     break;
             }
         }
+
+        //$this->stmt->bind($param, $value, $type);
+        $this->stmt->bindParam($param, $value, $type);
     }
 
     //Metodo para ejecutar la sentencia
@@ -97,5 +100,10 @@
         return $this->stmt->rowCount();
     }
 
+    //Validar si se agrego un registro
+    public function lastInsertId()
+    {
+        return $this->dbh->lastInsertId();
+    }
 
  }

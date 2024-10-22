@@ -1,12 +1,17 @@
-<?php require_once(APPROOT . '/views/shared/header.php'); ?>
+<?php require_once(APPROOT . '/views/shared/header.php'); var_dump(session_id()); if (!function_exists('flash')) {
+    die('La función flash no está definida');
+}?>
+
 <div class="jumbotron">
-    <h1 class="dispplay-3">Register</h1>
+    <h1 class="dispplay-3">Login</h1>
 
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="card-card-body bg-ligth-mt-5">
-                    <h2>Crear una cuenta</h2>
-                    <p>Por favor llena los campos para poder registrarte</p>
+
+                <?php flash('register_success'); ?>        
+                <h2>Inicia Sesion</h2>
+                    <p>Por favor llena los campos para poder ingresar</p>
                     <form action="<?php echo URLROOT ?>/users/login" method="post">
                         
 

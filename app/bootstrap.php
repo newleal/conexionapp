@@ -1,6 +1,8 @@
 <?php
 
 //Cargar archivo de config
+require_once ('helpers/sessionHelper.php');
+require_once ('helpers/urlHelper.php');
 require_once ('config/config.php');
 
 //cargar archivos de librerias
