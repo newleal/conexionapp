@@ -52,5 +52,32 @@
 
     }
 
+    //validar login de usuarios
+    public function login($email, $password = null)
+    {   
+        $this->db->query("SELECT * FROM users WHERE email = :email");
+        //enlace de parametros
+        $this->db->bind(':email', $email, null);
+        $this->db->execute();
+
+        //obteneos el resultado
+        $user = $this->db->single();
+
+        
+        //verificar si las password coinciden
+        if($user)
+        {
+            
+            $hashedPassword = $user->password;//obtengo la password del usuario
+            
+            if(password_verify($password, $hashedPassword))
+            {
+                return $user;
+            }
+        } else{
+            return false;
+        }
+    }
+
 
  }

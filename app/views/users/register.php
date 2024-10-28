@@ -3,13 +3,13 @@
     <h1 class="display-3">Register</h1>
 
     <div class="row">
-        <div class="col-mb-6 mx-auto">
+        <div class="col-md-6 mx-auto">
             <div class="card card-body bg-ligth mt-5">
                 <h2>Crear una Cuenta</h2>
                 <p>Por favor llena los campos para registrarte</p>
 
                 <?php echo !empty($mesaje['mensaje']) ? $mesaje['mensaje']: '';?>
-                <?php echo var_dump($data);?>
+               
 
                 <form  action="<?php echo URLROOT . '/users/register'; ?>" method="post">
                     

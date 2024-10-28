@@ -90,6 +90,7 @@
                 //se registra usuario en db
                 if($this->usermodel->register($data))
                 {
+                    flash('register_success', 'Ya estas registrado y puede iniciar sesion');
                     redirect('users/login');
                 }else{
                     die('Algo salio mal.');
@@ -130,6 +131,7 @@
             //sanitizamos la data de post
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_URL);
 
+
             //agregamos datos
             $data = [
                 'email' => $post['email'],
@@ -139,7 +141,38 @@
 
             ];
 
-            //validar si los campos estancompletos
+            //validar si los campos estan completos
+
+            if(empty($data['email']))
+            {
+                $data['email_err'] = 'Porfa vor ingresa tu correo electronico'; 
+            } else {
+
+                //validar si el correo si existe en la aplicacion
+                if(empty($this->usermodel->findUserByEmail($data['email'])))
+                {
+                    //validar si existe
+                    $data['email_err'] = 'La cuenta no esta registrada';
+                }
+            }
+
+            if($this->usermodel->login($data['email'], $data['password']))
+            {
+                //Creamos variables de sesion
+                die('success');
+            } else {
+                
+                $data['password_err'] = 'La contraseña o el correo no son correctos';
+            }
+
+            ///si los errores no estan vacios se envia las advertencias
+            if(empty($data['email_err']) && empty($data['password_err']))
+            {
+                ///
+            } else {
+                $this->views('users/login', $data);
+            }
+
             
 
         } else {
