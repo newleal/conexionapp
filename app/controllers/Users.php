@@ -143,6 +143,7 @@
 
             //validar si los campos estan completos
 
+            //validar email
             if(empty($data['email']))
             {
                 $data['email_err'] = 'Porfa vor ingresa tu correo electronico'; 
@@ -156,13 +157,23 @@
                 }
             }
 
-            if($this->usermodel->login($data['email'], $data['password']))
+            //Obtenemos datos del usuario validado    
+            $user = $this->usermodel->login($data['email'], $data['password']);
+            
+            if(empty($data['password']))
             {
-                //Creamos variables de sesion
-                die('success');
-            } else {
-                
-                $data['password_err'] = 'La contraseña o el correo no son correctos';
+                $data['password_err'] = 'Por favor ingresa una contraseña';
+            } else{
+
+                if($user)
+                {
+                    //Creamos variables de sesion
+                    $this->createUserSession($user);
+                    redirect('posts');
+                } else {
+                    
+                    $data['password_err'] = 'La contraseña o el correo no son correctos';
+                }
             }
 
             ///si los errores no estan vacios se envia las advertencias
@@ -192,4 +203,32 @@
         }
 
     }
+
+    //creacion de variables de desesion
+    public function createUserSession($user)
+    {
+        //Se crea las variable de session
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_name'] = $user->name;
+        $_SESSION['user_email'] = $user->email;
+
+        //se redirige al index
+        redirect('Paginas/index');
+    }
+
+    //cerrar la sesion
+    public function logout()
+    {
+        //eliminar las variables de sesion
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_name']);
+        unset($_SESSION['user_email']);
+
+        //destruye la sesion
+        session_destroy();
+
+        redirect('users/login');//redirijo a login
+    }
+
+
  }

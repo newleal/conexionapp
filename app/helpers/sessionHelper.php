@@ -24,3 +24,14 @@ function flash($name, $message = '', $class='alert alert-success')
         }
     }
 }
+
+   //comprbar si un usuario esta logueado
+   function isLoggedIn()
+   {
+       if (isset($_SESSION['user_id']))
+       {
+           return true;
+       } else {
+           return false;
+       }
+   }

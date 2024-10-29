@@ -15,12 +15,16 @@
 
     public function index()
     {
-        //traemos la consulta
-        $posts = $this->posts->getPosts();
+        //Validacion de sesion
+        if(isLoggedIn())
+        {
+            redirect('posts');
+        }
 
-        $data = ['titulo' => 'Bievenidos al ',
-                 'posts' => $posts   
-                ];
+        //traemos la consulta
+        
+
+        $data = ['titulo' => 'Bievenidos.'];
 
         $this->views('paginas/index', $data);
     }
