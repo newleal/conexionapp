@@ -5,20 +5,29 @@
  * carga la vistea del usuaro loggeado
  */
 
- class Paginas{
+ class Paginas extends Controller{
+
+    //vatiale de instancia del modelo pagina
+    private $postsModel;
 
     public function __construct(){
-
-        echo 'Hola desde construct de Paginas';
+        
+        $this->postsModel = $this->model('Pagina');
     }
 
     public function index()
     {
-        echo 'Metodo index del controlador Paginas';
+        //traer el resultado de la consulta
+        $posts = $this->postsModel->getPosts();
+        $data = [
+            'titulo' => 'Bienvenidos al index',
+            'posts' => $posts,
+        ];
+        $this->view('paginas/index', $data);
     }
 
     public function about()
     {
-        echo 'Metodo about del controlador Paginas';
+        $this->view('paginas/about');
     }
  }
