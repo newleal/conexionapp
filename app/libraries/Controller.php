@@ -11,9 +11,10 @@
         //validar si existe el archivo
         if(file_exists('../app/models/' . $model . '.php'))
         {
+            //echo file_exists('../app/models/' . $model . '.php');
             //requerir el archivo
             require_once ('../app/models/' . $model . '.php');
-
+            
             //devolver la instancia
             return new $model();
         } else {

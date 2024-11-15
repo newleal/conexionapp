@@ -39,7 +39,7 @@
     //creacion de la consulta
     public function query($SQL)
     {
-        $this->stmt = $this->dbh->query($SQL);
+        $this->stmt = $this->dbh->prepare($SQL);
     }
 
     //validaicon del tipo de dato  enviado por parametro
@@ -91,7 +91,7 @@
     }
 
     //conteo de registros
-    public function countRow()
+    public function rowCount()
     {
         return $this->stmt->rowCount();
     }
