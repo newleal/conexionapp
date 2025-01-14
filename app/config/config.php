@@ -8,3 +8,10 @@ define('URLROOT', "http://localhost/conexionapp");
 
 //nombre de la aplicacion
 define('SITENAME', "MVCPosts");
+
+
+//conexion a bases de datos - parametros
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'mvcposts');
