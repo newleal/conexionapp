@@ -7,16 +7,16 @@ class Paginas extends Controller{
     public function __construct() {
 
         //echo 'Paginas cargadas';
-        $this->postModel = $this->model('Post');
+       // $this->postModel = $this->model('Post');
     }
 
     public function index()
     {
-        $posts = $this->postModel->getPosts();
+        //$posts = $this->postModel->getPosts();
 
         $data = [
             'titulo' => 'Bienvenido',
-            'posts' => $posts,
+            //'posts' => $posts,
         ];
         $this->view('paginas/index', $data);
     }

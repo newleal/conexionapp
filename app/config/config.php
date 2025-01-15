@@ -15,3 +15,6 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'mvcposts');
+
+//Version de la aplicacion
+define('APPVERSION', 'V1.0.0');
