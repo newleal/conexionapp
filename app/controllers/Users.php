@@ -39,4 +39,28 @@
         }        
     }
 
+    //login inciar sesion
+    public function login()
+    {
+        //Verificar POST
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            //validacion de campos
+        } else {
+
+            //envio de datos
+
+            $data = [
+                'email' => '',
+                'password' => '',
+                'email_err' => '',
+                'password_err' => '',
+            ];
+
+            //cargar a la vista
+            $this->view('users/login', $data);
+        }        
+    }
+    
+
  }
