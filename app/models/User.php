@@ -32,6 +32,19 @@
     //register users
     public function register($data)
     {
+        //ingreso de usuario a la base de datos
+        $this->db->query("INSERT INTO users (name, email, password) VALUES(:name, :email, :password)");
+        $this->db->bind(':name', $data['name'], null);
+        $this->db->bind(':email', $data['email'], null);
+        $this->db->bind(':password', $data['password'], null);
+        
+        //ejecucion del script
+        if($this->db->execute())
+        {
+            return true;
+        }else {
+            return false;
+        }
         
     }
 

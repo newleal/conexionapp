@@ -77,9 +77,18 @@
             {
                 //validado
                 //se jashea la contraseña
-                //$data['password'] = has
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                
+                //Registrar el usuario
+                if($this->userModel->register($data))
+                {
+                    flash('register_success', 'Ya estas registrado y puedes inciar sesion');
+                    redirect('users/login');
+                }else {
 
-                die('Exitoso');
+                    die('Algo malo paso');
+                }
+
             }else {
                 //carga de array data con los errores
                 $this->view('users/register', $data);

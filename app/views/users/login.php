@@ -4,6 +4,7 @@
         <div class="col-md-6 mx-auto">
             <div class="card card-body bg-light mt-5">
                 <h2>Crear una cuenta</h2>
+                <?php flash('register_success'); ?>
                 <p>Por favor diligencia los campos para iniciar sesión</p>
 
                 <form action="<?php echo URLROOT . '/users/login/'?>" method="post">
