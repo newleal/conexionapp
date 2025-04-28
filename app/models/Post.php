@@ -1,0 +1,25 @@
+<?php
+
+//conexion con la base de datos
+class Post{
+
+    private $db;
+
+    public function __construct()
+    {
+        $this->db = new Database();
+    }
+
+    public function getPosts()
+    {
+        $this->db->query('SELECT *, posts.id as postsId,
+                                 posts.create_at as postCreatedAt, 
+                                 users.id as userId, 
+                                 users.create_at as userCreatedAt FROM posts
+                                 INNER JOIN users ON posts.user_id = users.id
+                                 ORDER BY posts.create_at DESC');
+
+        $results = $this->db->resultSet();                         
+        return $results;
+    }
+}
