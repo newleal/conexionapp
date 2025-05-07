@@ -63,4 +63,19 @@ class User {
             return false;
         }
     }
+
+    //obtener usuar por id
+    public function getUserById($id)
+    {
+        $this->db->query('SELECT * FROM users WHERE id= :id');
+        $this->db->bind(':id', $id, null);
+        $user = $this->db->single();
+
+        if($user)
+        {
+            return $user;
+        } else{
+            return false;
+        }
+    }
 }
